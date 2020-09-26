@@ -1,0 +1,234 @@
+{
+  "id": 1,
+  "version": {
+    "id": 1,
+    "mayor": 1,
+    "minor": 0,
+    "patch": 0,
+    "build": 0
+  },
+  "flowConnection": [],
+  "flowVariable": [
+    {
+      "id": 1,
+      "nameSpace": "taskInfo",
+      "name": "flowVariableMessageSuccess",
+      "description": "-",
+      "dataType": "String"
+    },
+    {
+      "id": 2,
+      "nameSpace": "taskInfo",
+      "name": "flowVariableValidationEmail",
+      "description": "variable to indicate if an email is valid",
+      "dataType": "Boolean"
+    },
+    {
+      "id": 3,
+      "nameSpace": "taskInfo",
+      "name": "flowVariableValidationEmailList",
+      "description": "variable to indicate if an email is valid comparing against list",
+      "dataType": "Boolean"
+    }
+  ],
+  "flowParameter": [
+    {
+      "id": 1,
+      "business": "global",
+      "nameSpace": "taskInfo",
+      "value": "^[\\w - \\.]+@([\\w -]+\\.)+[\\w -]{2,4}$",
+      "description": "exprexion regular",
+      "internalDataType": "string",
+      "parameterDataType": "string",
+      "parameterName": "regExpEmail"
+    },
+    {
+      "id": 2,
+      "business": "global",
+      "nameSpace": "taskInfo",
+      "value": "['plainaddress','#@%^%#$@#$@#.com', '@example.com', 'email@-example.com']",
+      "description": "delimiter of a plain file",
+      "internalDataType": "string",
+      "parameterDataType": "string",
+      "parameterName": "listCompareEmail"
+    },
+    {
+      "id": 3,
+      "business": "global",
+      "nameSpace": "sourceData",
+      "value": "usuario123@gmail.com",
+      "description": "email",
+      "internalDataType": "String",
+      "parameterDataType": "String",
+      "parameterName": "email"
+    }
+  ],
+  "flowTask": [
+    {
+      "id": 1,
+      "isStartingTask": true,
+      "flowConstraints": {
+        "id": 1,
+        "fromTaskGuid": "1",
+        "actionWhileError": {
+          "id": 2,
+          "taskName": "comparar email contra lista",
+          "taskType": "TaskCompareAgainstList",
+          "internalConnectionName": null,
+          "internalConnectionDelegates": {},
+          "availableOutputs": [
+            "{taskOutput.emailValidationList}"
+          ],
+          "listToCompare": "{flowParameter.taskInfo_listCompareEmail}",
+          "text": "{flowParameter.sourceData_email}",
+          "compareMethod": "exact"
+        },
+        "actionWhileSuccess": {
+          "id": 2,
+          "taskName": "comparar email contra lista",
+          "taskType": "TaskCompareAgainstList",
+          "internalConnectionName": null,
+          "internalConnectionDelegates": {},
+          "availableOutputs": [
+            "{taskOutput.emailValidationList}"
+          ],
+          "listToCompare": "{flowParameter.taskInfo_listCompareEmail}",
+          "text": "{flowParameter.sourceData_email}",
+          "compareMethod": "exact"
+        },
+        "actionWhileFinalized": {
+          "id": 2,
+          "taskName": "comparar email contra lista",
+          "taskType": "TaskCompareAgainstList",
+          "internalConnectionName": null,
+          "internalConnectionDelegates": {},
+          "availableOutputs": [
+            "{taskOutput.emailValidationList}"
+          ],
+          "listToCompare": "{flowParameter.taskInfo_listCompareEmail}",
+          "text": "{flowParameter.sourceData_email}",
+          "compareMethod": "exact"
+        },
+        "constraintGuid": "3fa85f64-5717-4562-b3fc-2c963f66afa8"
+      },
+      "connectionName": {},
+      "name": "flowTaskRegExp",
+      "itemInfo": {
+        "id": 1,
+        "taskName": "comparar email contra expresion regular",
+        "taskType": "TaskRegExp",
+        "internalConnectionName": null,
+        "internalConnectionDelegates": {},
+        "availableOutputs": [
+          "{taskOutput.emailValidationRegExp}"
+        ],
+        "regExp": "{flowParameter.taskInfo_regExpEmail}",
+        "text": "{flowParameter.sourceData_email}"
+      },
+      "taskGuid": 1,
+      "executeIfVariable": null,
+      "variableValueIs": null
+    },
+    {
+      "id": 2,
+      "isStartingTask": false,
+      "flowConstraints": {
+        "id": 2,
+        "fromTaskGuid": "2",
+        "actionWhileError": {
+          "id": 3,
+          "taskName": "mesaje exito",
+          "taskType": "TaskSuccess",
+          "internalConnectionName": null,
+          "internalConnectionDelegates": {},
+          "availableOutputs": [
+            "{taskOutput.messageSuccess}"
+          ],
+          "messageSuccess": "Task Successful!"
+        },
+        "actionWhileSuccess": {
+          "id": 3,
+          "taskName": "mesaje exito",
+          "taskType": "TaskSuccess",
+          "internalConnectionName": null,
+          "internalConnectionDelegates": {},
+          "availableOutputs": [
+            "{taskOutput.messageSuccess}"
+          ],
+          "messageSuccess": "Task Successful!"
+        },
+        "actionWhileFinalized": {
+          "id": 3,
+          "taskName": "mesaje exito",
+          "taskType": "TaskSuccess",
+          "internalConnectionName": null,
+          "internalConnectionDelegates": {},
+          "availableOutputs": [
+            "{taskOutput.messageSuccess}"
+          ],
+          "messageSuccess": "Task Successful!"
+        },
+        "constraintGuid": "3fa85f64-5717-4562-b3fc-2c963f66afa4"
+      },
+      "connectionName": {},
+      "name": "flowTaskCompareAgainstList",
+      "itemInfo": {
+        "id": 2,
+        "taskName": "comparar email contra lista",
+        "taskType": "TaskCompareAgainstList",
+        "internalConnectionName": null,
+        "internalConnectionDelegates": {},
+        "availableOutputs": [
+          "{taskOutput.emailValidationList}"
+        ],
+        "listToCompare": "{flowParameter.taskInfo_listCompareEmail}",
+        "text": "{flowParameter.sourceData_email}",
+        "compareMethod": "exact"
+      },
+      "taskGuid": 2,
+      "executeIfVariable": null,
+      "variableValueIs": null
+    },
+    {
+      "id": 3,
+      "isStartingTask": false,
+      "flowConstraints": {},
+      "connectionName": {},
+      "name": "flowTaskSuccess",
+      "itemInfo": {
+        "id": 3,
+        "taskName": "mesaje exito",
+        "taskType": "TaskSuccess",
+        "internalConnectionName": null,
+        "internalConnectionDelegates": {},
+        "availableOutputs": [
+          "{taskOutput.messageSuccess}"
+        ],
+        "messageSuccess": "Task Successful!"
+      },
+      "taskGuid": 3,
+      "executeIfVariable": null,
+      "variableValueIs": null
+    }
+  ],
+  "taskOutput": [
+    {
+      "id": 1,
+      "key": "messageSuccess",
+      "outputDescription": "Message after successful task",
+      "storeInVariablesName": "taskInfo_flowVariableMessageSuccess"
+    },
+    {
+      "id": 2,
+      "key": "emailValidationList",
+      "outputDescription": "-",
+      "storeInVariablesName": "taskInfo_flowVariableValidationEmailList"
+    },
+    {
+      "id": 3,
+      "key": "emailValidationRegExp",
+      "outputDescription": "-",
+      "storeInVariablesName": "taskInfo_flowVariableValidationEmail"
+    }
+  ]
+}

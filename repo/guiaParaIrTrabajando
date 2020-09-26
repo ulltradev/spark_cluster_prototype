@@ -1,0 +1,14 @@
+1 -- Me robe el diseño del cluster spark de aca https://medium.com/@marcovillarreal_40011/creating-a-spark-standalone-cluster-with-docker-and-docker-compose-ba9d743a157f
+
+2-- ./build-images.sh\
+
+3-- docker rmi $(docker images -f "dangling=true" -q)  # https://www.projectatomic.io/blog/2015/07/what-are-docker-none-none-images/
+
+4-- docker-compose up
+
+5-- no funciono, ahora intenemos con este y entramos directo al master, https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html
+
+6-- JupyterLab at localhost:8888;
+    Spark master at localhost:8083;
+    Spark worker I at localhost:8081;
+    Spark worker II at localhost:8082; 
